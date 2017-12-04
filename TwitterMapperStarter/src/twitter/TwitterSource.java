@@ -6,10 +6,11 @@ import util.ImageCache;
 import java.util.*;
 
 
-public abstract class TwitterSource {
+public abstract class TwitterSource extends Observable{
     protected boolean doLogging = true;
     // The set of terms to look for in the stream of tweets
     protected Set<String> terms = new HashSet<>();
+    //protected Set<Observer> observers = new HashSet<>();
 
     // Called each time a new set of filter terms has been established
     abstract protected void sync();
@@ -35,6 +36,7 @@ public abstract class TwitterSource {
     // TODO: Each active query should be informed about each incoming tweet so that
     //       it can determine whether the tweet should be displayed
     protected void handleTweet(Status s) {
-
+        setChanged();           // IMPORTANT
+        notifyObservers(s);
     }
 }
