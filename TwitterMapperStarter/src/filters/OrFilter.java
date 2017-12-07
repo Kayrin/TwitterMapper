@@ -31,6 +31,6 @@ public class OrFilter implements Filter{
     }
 
     public String toString() {
-        return child1.toString() + " or " + child2.toString();
+        return "(" + child1.toString() + " or " + child2.toString() + ")";
     }
 }

@@ -31,6 +31,6 @@ public class AndFilter implements Filter {
     }
 
     public String toString() {
-        return child1.toString() + " and " + child2.toString();
+        return "(" + child1.toString() + " and " + child2.toString() + ")";
     }
 }
