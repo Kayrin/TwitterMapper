@@ -12,6 +12,7 @@ public class ObjectSource {
     public ObjectSource(String filename)  {
         file = new File(filename);
         try {
+            System.out.println(file.getAbsolutePath());
             instream = new ObjectInputStream(new FileInputStream(file));
         } catch (IOException e) {
             e.printStackTrace();

@@ -59,7 +59,7 @@ public class Parser {
         while (token != null && token.equals(OR)) {
             scanner.advance();
             Filter right = andexpr();
-            
+
             // At this point we have two subexpressions ("sub" on the left and "right" on the right)
             // that are to be connected by "or"
             // TODO: Construct the appropriate new Filter object

@@ -113,4 +113,8 @@ public class NewQueryPanel extends JPanel {
         final float luminance = 0.9f;
         return Color.getHSBColor(hue, saturation, luminance);
     }
+
+    public Color getColor() {
+        return colorSetter.getBackground();
+    }
 }
