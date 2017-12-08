@@ -91,7 +91,7 @@ public class ImageCache {
 
     // I'm going to assume that hashing is good enough and collisions are rare enough
     private String saveImage(BufferedImage image, String path) {
-        File dir = new File("data/imagecache");
+        File dir = new File("TwitterMapperStarter/data/imagecache");
         if (!dir.isDirectory()) {
             dir.mkdir();
         }

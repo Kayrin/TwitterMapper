@@ -11,5 +11,7 @@ public class MapMarkerColored extends MapMarkerSimple {
     public MapMarkerColored(Layer layer, Coordinate coord, Color color){
         super(layer, coord);
         this.color = color;
+        setColor(Color.BLACK);
+        setBackColor(color);
     }
 }

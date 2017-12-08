@@ -5,6 +5,8 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Layer;
 import twitter4j.Status;
+import ui.MapMarkerColored;
+import ui.MapMarkerImage;
 import ui.MapMarkerSimple;
 
 import javax.swing.*;
@@ -75,10 +77,11 @@ public class Query implements Observer{
         Status s = (Status)status;
         if(filter.matches(s)){
             // tweet's location
-            Coordinate coor = util.Util.statusCoordinate(s);
+            Coordinate coord = util.Util.statusCoordinate(s);
 
             // add a marker at this location
-            map.addMapMarker(new MapMarkerSimple(layer, coor));
+            //map.addMapMarker(new MapMarkerColored(layer, coord, color));
+            map.addMapMarker(new MapMarkerImage(layer, coord, s.getUser().getProfileImageURL()));
         }
     }
 

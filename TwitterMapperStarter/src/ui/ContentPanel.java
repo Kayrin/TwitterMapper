@@ -96,4 +96,6 @@ public class ContentPanel extends JPanel {
     public JMapViewer getViewer() {
         return map;
     }
+
 }
+
