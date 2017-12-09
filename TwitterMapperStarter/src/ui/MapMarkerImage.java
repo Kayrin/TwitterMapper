@@ -13,10 +13,12 @@ public class MapMarkerImage extends MapMarkerCircle implements MapMarker {
     public static final Color defaultColor = Color.white;
 
     private BufferedImage image;
+    private String text;
 
-    public MapMarkerImage(Layer layer, Coordinate coord, String url) {
+    public MapMarkerImage(Layer layer, Coordinate coord, String url, String text) {
         super(layer, null, coord, defaultMarkerSize, STYLE.FIXED, getDefaultStyle());
         image = util.Util.imageFromURL(url);
+        this.text = text;
         setColor(Color.BLACK);
         setBackColor(defaultColor);
     }
@@ -32,5 +34,11 @@ public class MapMarkerImage extends MapMarkerCircle implements MapMarker {
         this.paintText(g, position);
     }
 
+    public BufferedImage getImage() {
+        return image;
+    }
 
+    public String getText(){
+        return text;
+    }
 }

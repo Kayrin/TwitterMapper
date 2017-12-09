@@ -10,7 +10,6 @@ public abstract class TwitterSource extends Observable{
     protected boolean doLogging = true;
     // The set of terms to look for in the stream of tweets
     protected Set<String> terms = new HashSet<>();
-    //protected Set<Observer> observers = new HashSet<>();
 
     // Called each time a new set of filter terms has been established
     abstract protected void sync();

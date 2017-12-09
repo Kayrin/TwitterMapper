@@ -81,7 +81,9 @@ public class Query implements Observer{
 
             // add a marker at this location
             //map.addMapMarker(new MapMarkerColored(layer, coord, color));
-            map.addMapMarker(new MapMarkerImage(layer, coord, s.getUser().getProfileImageURL()));
+            System.out.println(s.getText());
+            map.addMapMarker(new MapMarkerImage(layer, coord, s.getUser().getProfileImageURL(),
+                    s.getText()));
         }
     }
 
