@@ -3,7 +3,9 @@ package ui;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.Layer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerCircle;
+import org.openstreetmap.gui.jmapviewer.MapRectangleImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,6 +16,7 @@ public class MapMarkerImage extends MapMarkerCircle implements MapMarker {
 
     private BufferedImage image;
     private String text;
+    private MapRectangle rectangle;
 
     public MapMarkerImage(Layer layer, Coordinate coord, String url, String text) {
         super(layer, null, coord, defaultMarkerSize, STYLE.FIXED, getDefaultStyle());
@@ -32,6 +35,11 @@ public class MapMarkerImage extends MapMarkerCircle implements MapMarker {
         int h2 = height / 2;
         g.drawImage(this.image, position.x - w2, position.y - h2, width, height, null);
         this.paintText(g, position);
+
+        int x1 = (int)(rectangle.getTopLeft().getLat());
+        int y1 = (int)(rectangle.getTopLeft().getLon());
+        int x2 = (int)(rectangle.getBottomRight().getLat());
+        int y2 = (int)(rectangle.getBottomRight().getLon());
     }
 
     public BufferedImage getImage() {
