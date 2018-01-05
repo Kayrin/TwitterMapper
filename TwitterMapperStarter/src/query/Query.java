@@ -4,6 +4,8 @@ import filters.Filter;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Layer;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapObject;
+import org.w3c.dom.html.HTMLMapElement;
 import twitter4j.Status;
 import ui.MapMarkerColored;
 import ui.MapMarkerImage;
@@ -89,11 +91,9 @@ public class Query implements Observer{
 
     /**
      * This query is no longer interesting, so terminate it and remove all traces of its existence.
-     *
-     * TODO: Complete the method
      */
     public void terminate() {
-
+        layer.setVisible(false);
     }
 
 

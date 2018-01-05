@@ -35,11 +35,6 @@ public class MapMarkerImage extends MapMarkerCircle implements MapMarker {
         int h2 = height / 2;
         g.drawImage(this.image, position.x - w2, position.y - h2, width, height, null);
         this.paintText(g, position);
-
-        int x1 = (int)(rectangle.getTopLeft().getLat());
-        int y1 = (int)(rectangle.getTopLeft().getLon());
-        int x2 = (int)(rectangle.getBottomRight().getLat());
-        int y2 = (int)(rectangle.getBottomRight().getLon());
     }
 
     public BufferedImage getImage() {

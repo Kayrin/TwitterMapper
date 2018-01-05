@@ -42,7 +42,7 @@ public class ContentPanel extends JPanel {
         querySplitPane.setBottomComponent(layerPanelContainer);
 
         topLevelSplitPane = new JSplitPane(1);
-        topLevelSplitPane.setDividerLocation(150);
+        topLevelSplitPane.setDividerLocation(200);
         topLevelSplitPane.setLeftComponent(querySplitPane);
         topLevelSplitPane.setRightComponent(map);
 
@@ -56,11 +56,23 @@ public class ContentPanel extends JPanel {
     public void addQuery(Query query) {
         JPanel newQueryPanel = new JPanel();
         newQueryPanel.setLayout(new GridBagLayout());
+
         JPanel colorPanel = new JPanel();
         colorPanel.setBackground(query.getColor());
         colorPanel.setPreferredSize(new Dimension(30, 30));
-        JButton removeButton = new JButton("X");
-        removeButton.setPreferredSize(new Dimension(30, 20));
+
+        JButton pauseButton = new JButton("||");
+        pauseButton.setPreferredSize(new Dimension(30, 20));
+        pauseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //app.terminateQuery(query);
+                //revalidate();
+            }
+        });
+
+        JButton removeButton = new JButton("x");
+        removeButton.setPreferredSize(new Dimension(40, 20));
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,6 +99,7 @@ public class ContentPanel extends JPanel {
         c.weightx = 1.0;
         c.fill = GridBagConstraints.HORIZONTAL;
         newQueryPanel.add(checkbox, c);
+        newQueryPanel.add(pauseButton);
         newQueryPanel.add(removeButton);
 
         existingQueryList.add(newQueryPanel);
