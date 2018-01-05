@@ -4,12 +4,8 @@ import filters.Filter;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Layer;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapObject;
-import org.w3c.dom.html.HTMLMapElement;
 import twitter4j.Status;
-import ui.MapMarkerColored;
 import ui.MapMarkerImage;
-import ui.MapMarkerSimple;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,12 +76,11 @@ public class Query implements Observer{
         if(filter.matches(s)){
             // tweet's location
             Coordinate coord = util.Util.statusCoordinate(s);
+            //System.out.println(s.getPlace().getURL());
 
             // add a marker at this location
             //map.addMapMarker(new MapMarkerColored(layer, coord, color));
-            //System.out.println(s.getText());
-            map.addMapMarker(new MapMarkerImage(layer, coord, s.getUser().getProfileImageURL(),
-                    s.getText()));
+            map.addMapMarker(new MapMarkerImage(layer, coord, s.getUser().getProfileImageURL(), s));
         }
     }
 

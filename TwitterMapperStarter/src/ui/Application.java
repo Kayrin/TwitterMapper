@@ -3,10 +3,8 @@ package ui;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Layer;
-import org.openstreetmap.gui.jmapviewer.MapRectangleImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.ICoordinate;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
 import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
 import query.Query;
 import twitter.PlaybackTwitterSource;
@@ -118,6 +116,25 @@ public class Application extends JFrame {
         };
         bingTimer.schedule(bingAttributionCheck, 100, 200);
 
+        map().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    Point p = e.getPoint();
+                    ICoordinate pos = map().getPosition(p);
+                    System.out.format("Clicked at %f,%f (%d,%d)px\n", pos.getLat(), pos.getLon(), p.x, p.y);
+
+                    List<MapMarker> markers = getMarkersCovering(pos, pixelWidth(p));
+                    for (MapMarker m : markers) {
+                        if (m instanceof MapMarkerImage) {
+                            contentPanel.updateTweetPanel(((MapMarkerImage)m).getStatus().getText());
+                        }
+                    }
+                }
+            }
+        });
+
+
         // Set up a motion listener to create a tooltip showing the tweets at the pointer position
         map().addMouseMotionListener(new MouseAdapter() {
             @Override
@@ -125,15 +142,13 @@ public class Application extends JFrame {
                 Point p = e.getPoint();
                 ICoordinate pos = map().getPosition(p);
 
-                List<MapMarker> markers = getMarkersCovering(pos, pixelWidth(p));
-                for (MapMarker m : markers) {
-                    if (m instanceof MapMarkerImage) {
-                        map().setToolTipText(((MapMarkerImage) m).getText());
-                    }
-                }
-
+//                List<MapMarker> markers = getMarkersCovering(pos, pixelWidth(p));
+//                for (MapMarker m : markers) {
+//                    if (m instanceof MapMarkerImage) {
+//                        map().setToolTipText(((MapMarkerImage) m).getText());
+//                    }
+//                }
                 //map().addMapRectangle(rect);
-
                 //map().setToolTipText("This is a tooltip");
             }
 

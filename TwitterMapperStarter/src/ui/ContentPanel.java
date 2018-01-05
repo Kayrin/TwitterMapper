@@ -10,9 +10,11 @@ import java.awt.event.ActionListener;
 
 public class ContentPanel extends JPanel {
     private JSplitPane topLevelSplitPane;
+    private JSplitPane leftSplitPane;
     private JSplitPane querySplitPane;
     private JPanel newQueryPanel;
     private JPanel existingQueryList;
+    private TweetPanel currentTweetPanel;
     private JMapViewer map;
 
     private Application app;
@@ -23,6 +25,7 @@ public class ContentPanel extends JPanel {
         map = new JMapViewer();
         map.setMinimumSize(new Dimension(100, 50));
         setLayout(new BorderLayout());
+        currentTweetPanel = new TweetPanel("Tweet's content will be displayed here");
         newQueryPanel = new NewQueryPanel(app);
 
         // NOTE: We wrap existingQueryList in a container so it gets a pretty border.
@@ -36,13 +39,19 @@ public class ContentPanel extends JPanel {
                         BorderFactory.createEmptyBorder(5,5,5,5)));
         layerPanelContainer.add(existingQueryList, BorderLayout.NORTH);
 
+
+        leftSplitPane = new JSplitPane(0);
+        leftSplitPane.setDividerLocation(250);
+        leftSplitPane.setTopComponent(currentTweetPanel);
+        leftSplitPane.setBottomComponent(newQueryPanel);
         querySplitPane = new JSplitPane(0);
-        querySplitPane.setDividerLocation(150);
-        querySplitPane.setTopComponent(newQueryPanel);
+        querySplitPane.setDividerLocation(400);
+        querySplitPane.setTopComponent(leftSplitPane);
         querySplitPane.setBottomComponent(layerPanelContainer);
 
+
         topLevelSplitPane = new JSplitPane(1);
-        topLevelSplitPane.setDividerLocation(200);
+        topLevelSplitPane.setDividerLocation(300);
         topLevelSplitPane.setLeftComponent(querySplitPane);
         topLevelSplitPane.setRightComponent(map);
 
@@ -108,6 +117,10 @@ public class ContentPanel extends JPanel {
 
     public JMapViewer getViewer() {
         return map;
+    }
+
+    public void updateTweetPanel(String text){
+        currentTweetPanel.updateContent(text);
     }
 
 }

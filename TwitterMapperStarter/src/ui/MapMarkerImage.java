@@ -3,9 +3,8 @@ package ui;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.Layer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerCircle;
-import org.openstreetmap.gui.jmapviewer.MapRectangleImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapRectangle;
+import twitter4j.Status;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,13 +14,12 @@ public class MapMarkerImage extends MapMarkerCircle implements MapMarker {
     public static final Color defaultColor = Color.white;
 
     private BufferedImage image;
-    private String text;
-    private MapRectangle rectangle;
+    private Status status;
 
-    public MapMarkerImage(Layer layer, Coordinate coord, String url, String text) {
+    public MapMarkerImage(Layer layer, Coordinate coord, String url, Status status) {
         super(layer, null, coord, defaultMarkerSize, STYLE.FIXED, getDefaultStyle());
         image = util.Util.imageFromURL(url);
-        this.text = text;
+        this.status = status;
         setColor(Color.BLACK);
         setBackColor(defaultColor);
     }
@@ -41,7 +39,7 @@ public class MapMarkerImage extends MapMarkerCircle implements MapMarker {
         return image;
     }
 
-    public String getText(){
-        return text;
+    public Status getStatus(){
+        return status;
     }
 }
