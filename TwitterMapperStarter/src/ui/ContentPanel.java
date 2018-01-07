@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import ui.NTweetsTimer;
 
 public class ContentPanel extends JPanel {
     private JSplitPane topLevelSplitPane;
@@ -14,6 +15,12 @@ public class ContentPanel extends JPanel {
     private JPanel newQueryPanel;
     private JPanel existingQueryList;
     private JMapViewer map;
+    private NTweetsTimer timer;
+    private int totalTweets = 0;
+    private JLabel totalTweetsLabel;
+
+
+
 
     private Application app;
 
@@ -25,6 +32,8 @@ public class ContentPanel extends JPanel {
         setLayout(new BorderLayout());
         newQueryPanel = new NewQueryPanel(app);
 
+        totalTweetsLabel = new JLabel("Number of Tweets : " + Integer.toString(totalTweets));
+
         // NOTE: We wrap existingQueryList in a container so it gets a pretty border.
         JPanel layerPanelContainer = new JPanel();
         existingQueryList = new JPanel();
@@ -35,11 +44,15 @@ public class ContentPanel extends JPanel {
                         BorderFactory.createTitledBorder("Current Queries"),
                         BorderFactory.createEmptyBorder(5,5,5,5)));
         layerPanelContainer.add(existingQueryList, BorderLayout.NORTH);
+        layerPanelContainer.add(totalTweetsLabel);
+
+        timer = new NTweetsTimer(existingQueryList, this);
 
         querySplitPane = new JSplitPane(0);
         querySplitPane.setDividerLocation(150);
         querySplitPane.setTopComponent(newQueryPanel);
         querySplitPane.setBottomComponent(layerPanelContainer);
+
 
         topLevelSplitPane = new JSplitPane(1);
         topLevelSplitPane.setDividerLocation(200);
@@ -54,8 +67,12 @@ public class ContentPanel extends JPanel {
 
     // Add a new query to the set of queries and update the UI to reflect the new query.
     public void addQuery(Query query) {
-        JPanel newQueryPanel = new JPanel();
+        QueryPanel newQueryPanel = query.getPanel();
         newQueryPanel.setLayout(new GridBagLayout());
+
+
+        newQueryPanel.label = new JLabel(Integer.toString(newQueryPanel.getNTweets()));
+
 
         JPanel colorPanel = new JPanel();
         colorPanel.setBackground(query.getColor());
@@ -101,6 +118,7 @@ public class ContentPanel extends JPanel {
         newQueryPanel.add(checkbox, c);
         newQueryPanel.add(pauseButton);
         newQueryPanel.add(removeButton);
+        newQueryPanel.add(newQueryPanel.label);
 
         existingQueryList.add(newQueryPanel);
         validate();
@@ -110,5 +128,10 @@ public class ContentPanel extends JPanel {
         return map;
     }
 
+    public int getTotalTweets() { return totalTweets; }
+
+    public void setTotal(int total) { totalTweets = total; }
+
+    public void setTotalTweetsLabel(String str) { totalTweetsLabel.setText(str);}
 }
 
