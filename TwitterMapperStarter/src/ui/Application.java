@@ -9,6 +9,7 @@ import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
 import query.Query;
 import twitter.PlaybackTwitterSource;
 import twitter.TwitterSource;
+import twitter4j.Status;
 import util.SphericalGeometry;
 
 import javax.swing.*;
@@ -127,7 +128,9 @@ public class Application extends JFrame {
                     List<MapMarker> markers = getMarkersCovering(pos, pixelWidth(p));
                     for (MapMarker m : markers) {
                         if (m instanceof MapMarkerImage) {
-                            contentPanel.updateTweetPanel(((MapMarkerImage)m).getStatus().getText());
+                            MapMarkerImage marker = (MapMarkerImage)m;
+                            Status s = marker.getStatus();
+                            contentPanel.updateTweetPanel(marker.getImage(), s.getText(), s.getCreatedAt(), s.getPlace().getFullName());
                         }
                     }
                 }

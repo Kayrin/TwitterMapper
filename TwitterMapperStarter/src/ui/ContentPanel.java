@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.Date;
+
+import static util.Util.imageFromURL;
 
 public class ContentPanel extends JPanel {
     private JSplitPane topLevelSplitPane;
@@ -25,7 +29,8 @@ public class ContentPanel extends JPanel {
         map = new JMapViewer();
         map.setMinimumSize(new Dimension(100, 50));
         setLayout(new BorderLayout());
-        currentTweetPanel = new TweetPanel("Tweet's content will be displayed here");
+        currentTweetPanel = new TweetPanel(imageFromURL("http://png-2.findicons.com/files/icons/1995/web_application/48/smiley.png"),
+                "Tweet's content will be displayed here", new Date(), "Location");
         newQueryPanel = new NewQueryPanel(app);
 
         // NOTE: We wrap existingQueryList in a container so it gets a pretty border.
@@ -70,15 +75,15 @@ public class ContentPanel extends JPanel {
         colorPanel.setBackground(query.getColor());
         colorPanel.setPreferredSize(new Dimension(30, 30));
 
-        JButton pauseButton = new JButton("||");
-        pauseButton.setPreferredSize(new Dimension(30, 20));
-        pauseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //app.terminateQuery(query);
-                //revalidate();
-            }
-        });
+//        JButton pauseButton = new JButton("||");
+//        pauseButton.setPreferredSize(new Dimension(30, 20));
+//        pauseButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                //app.terminateQuery(query);
+//                //revalidate();
+//            }
+//        });
 
         JButton removeButton = new JButton("x");
         removeButton.setPreferredSize(new Dimension(40, 20));
@@ -108,7 +113,7 @@ public class ContentPanel extends JPanel {
         c.weightx = 1.0;
         c.fill = GridBagConstraints.HORIZONTAL;
         newQueryPanel.add(checkbox, c);
-        newQueryPanel.add(pauseButton);
+//        newQueryPanel.add(pauseButton);
         newQueryPanel.add(removeButton);
 
         existingQueryList.add(newQueryPanel);
@@ -119,8 +124,8 @@ public class ContentPanel extends JPanel {
         return map;
     }
 
-    public void updateTweetPanel(String text){
-        currentTweetPanel.updateContent(text);
+    public void updateTweetPanel(BufferedImage image, String text, Date date, String location){
+        currentTweetPanel.updateContent(image, text, date, location);
     }
 
 }
