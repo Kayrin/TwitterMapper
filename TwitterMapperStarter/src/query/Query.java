@@ -88,7 +88,7 @@ public class Query implements Observer{
      * This query is no longer interesting, so terminate it and remove all traces of its existence.
      */
     public void terminate() {
-        layer.setVisible(false);
+        //layer.setVisible(false);
     }
 
 
