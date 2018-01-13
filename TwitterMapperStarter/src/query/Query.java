@@ -6,6 +6,8 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Layer;
 import twitter4j.Status;
 import ui.MapMarkerImage;
+import ui.MapMarkerSimple;
+import ui.QueryPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +30,9 @@ public class Query implements Observer{
     private final Filter filter;
     // The checkBox in the UI corresponding to this query (so we can turn it on and off and delete it)
     private JCheckBox checkBox;
+
+    private QueryPanel panel;
+
 
     public Color getColor() {
         return color;
@@ -58,6 +63,7 @@ public class Query implements Observer{
         this.color = color;
         this.layer = new Layer(queryString);
         this.map = map;
+        this.panel = new QueryPanel();
     }
 
     @Override
@@ -81,6 +87,8 @@ public class Query implements Observer{
             // add a marker at this location
             //map.addMapMarker(new MapMarkerColored(layer, coord, color));
             map.addMapMarker(new MapMarkerImage(layer, coord, s.getUser().getProfileImageURL(), s));
+
+            panel.incrementTweets();
         }
     }
 
@@ -91,6 +99,6 @@ public class Query implements Observer{
         layer.setVisible(false);
     }
 
-
+    public QueryPanel getPanel() { return panel; }
 }
 
