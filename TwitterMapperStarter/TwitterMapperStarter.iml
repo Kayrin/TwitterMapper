@@ -8,10 +8,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="twitter4j-http2-support" level="project" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="JMapViewer-2.3" level="project" />
-    <orderEntry type="library" name="twitter4j-appengine" level="project" />
     <orderEntry type="module" module-name="main" />
     <orderEntry type="module" module-name="test4" />
     <orderEntry type="module" module-name="main2" />
@@ -37,5 +35,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="okio-1.13.0" level="project" />
+    <orderEntry type="library" name="okhttp-3.9.1" level="project" />
   </component>
 </module>

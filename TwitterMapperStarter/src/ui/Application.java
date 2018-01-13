@@ -37,13 +37,13 @@ public class Application extends JFrame {
 
     private void initialize() {
         // To use the live twitter stream, use the following line
-        //twitterSource = new LiveTwitterSource();
+        twitterSource = new LiveTwitterSource();
 
         // To use the recorded twitter stream, use the following line
         // The number passed to the constructor is a speedup value:
         //  1.0 - play back at the recorded speed
         //  2.0 - play back twice as fast
-        twitterSource = new PlaybackTwitterSource(60.0);
+        //twitterSource = new PlaybackTwitterSource(60.0);
 
         queries = new ArrayList<>();
     }
@@ -124,7 +124,7 @@ public class Application extends JFrame {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     Point p = e.getPoint();
                     ICoordinate pos = map().getPosition(p);
-                    System.out.format("Clicked at %f,%f (%d,%d)px\n", pos.getLat(), pos.getLon(), p.x, p.y);
+                    //System.out.format("Clicked at %f,%f (%d,%d)px\n", pos.getLat(), pos.getLon(), p.x, p.y);
 
                     List<MapMarker> markers = getMarkersCovering(pos, pixelWidth(p));
                     for (MapMarker m : markers) {
@@ -138,7 +138,6 @@ public class Application extends JFrame {
                 }
             }
         });
-
 
         // Set up a motion listener to create a tooltip showing the tweets at the pointer position
         map().addMouseMotionListener(new MouseAdapter() {
@@ -154,7 +153,6 @@ public class Application extends JFrame {
 //                    }
 //                }
                 //map().addMapRectangle(rect);
-                //map().setToolTipText("This is a tooltip");
             }
 
         });
