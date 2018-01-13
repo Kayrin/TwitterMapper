@@ -29,7 +29,7 @@ public class ContentPanel extends JPanel {
         map = new JMapViewer();
         map.setMinimumSize(new Dimension(100, 50));
         setLayout(new BorderLayout());
-        currentTweetPanel = new TweetPanel(imageFromURL("http://png-2.findicons.com/files/icons/1995/web_application/48/smiley.png"),
+        currentTweetPanel = new TweetPanel("User", "nickname", imageFromURL("http://png-2.findicons.com/files/icons/1995/web_application/48/smiley.png"),
                 "Tweet's content will be displayed here", new Date(), "Location");
         newQueryPanel = new NewQueryPanel(app);
 
@@ -46,11 +46,11 @@ public class ContentPanel extends JPanel {
 
 
         leftSplitPane = new JSplitPane(0);
-        leftSplitPane.setDividerLocation(250);
+        leftSplitPane.setDividerLocation(200);
         leftSplitPane.setTopComponent(currentTweetPanel);
         leftSplitPane.setBottomComponent(newQueryPanel);
         querySplitPane = new JSplitPane(0);
-        querySplitPane.setDividerLocation(400);
+        querySplitPane.setDividerLocation(350);
         querySplitPane.setTopComponent(leftSplitPane);
         querySplitPane.setBottomComponent(layerPanelContainer);
 
@@ -124,8 +124,8 @@ public class ContentPanel extends JPanel {
         return map;
     }
 
-    public void updateTweetPanel(BufferedImage image, String text, Date date, String location){
-        currentTweetPanel.updateContent(image, text, date, location);
+    public void updateTweetPanel(String user, String nick, BufferedImage image, String text, Date date, String location){
+        currentTweetPanel.updateContent(user, nick, image, text, date, location);
     }
 
 }
