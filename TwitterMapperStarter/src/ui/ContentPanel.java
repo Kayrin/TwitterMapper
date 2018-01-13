@@ -25,9 +25,6 @@ public class ContentPanel extends JPanel {
     private int totalTweets = 0;
     private JLabel totalTweetsLabel;
 
-
-
-
     private Application app;
 
     public ContentPanel(Application app) {
@@ -80,26 +77,12 @@ public class ContentPanel extends JPanel {
 
     // Add a new query to the set of queries and update the UI to reflect the new query.
     public void addQuery(Query query) {
-        QueryPanel newQueryPanel = query.getPanel();
-        newQueryPanel.setLayout(new GridBagLayout());
-
-
-        newQueryPanel.label = new JLabel(Integer.toString(newQueryPanel.getNTweets()));
-
+        QueryPanel currentQueryPanel = query.getPanel();
+        currentQueryPanel.setLayout(new GridBagLayout());
 
         JPanel colorPanel = new JPanel();
         colorPanel.setBackground(query.getColor());
         colorPanel.setPreferredSize(new Dimension(30, 30));
-
-//        JButton pauseButton = new JButton("||");
-//        pauseButton.setPreferredSize(new Dimension(30, 20));
-//        pauseButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //app.terminateQuery(query);
-//                //revalidate();
-//            }
-//        });
 
         JButton removeButton = new JButton("x");
         removeButton.setPreferredSize(new Dimension(40, 20));
@@ -108,13 +91,13 @@ public class ContentPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 app.terminateQuery(query);
                 query.terminate();
-                existingQueryList.remove(newQueryPanel);
+                existingQueryList.remove(currentQueryPanel);
                 revalidate();
             }
         });
 
         GridBagConstraints c = new GridBagConstraints();
-        newQueryPanel.add(colorPanel, c);
+        currentQueryPanel.add(colorPanel, c);
 
         c = new GridBagConstraints();
         JCheckBox checkbox = new JCheckBox(query.getQueryString());
@@ -126,14 +109,19 @@ public class ContentPanel extends JPanel {
             }
         });
         query.setCheckBox(checkbox);
+
+        JPanel counterContainer = new JPanel();
+        counterContainer.setPreferredSize(new Dimension(30, 30));
+        currentQueryPanel.setLabel(new JLabel(Integer.toString(currentQueryPanel.getNTweets())));
+        counterContainer.add(currentQueryPanel.getLabel());
+
         c.weightx = 1.0;
         c.fill = GridBagConstraints.HORIZONTAL;
-        newQueryPanel.add(checkbox, c);
-//        newQueryPanel.add(pauseButton);
-        newQueryPanel.add(removeButton);
-        newQueryPanel.add(newQueryPanel.label);
+        currentQueryPanel.add(checkbox, c);
+        currentQueryPanel.add(removeButton);
+        currentQueryPanel.add(counterContainer);
 
-        existingQueryList.add(newQueryPanel);
+        existingQueryList.add(currentQueryPanel);
         validate();
     }
 

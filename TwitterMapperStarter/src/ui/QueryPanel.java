@@ -20,6 +20,14 @@ public class QueryPanel extends JPanel {
         totalNTweets++;
     }
 
+    public void setLabel(JLabel label){
+        this.label = label;
+    }
+
+    public JLabel getLabel(){
+        return label;
+    }
+
     public int getNTweets() { return nTweets; }
 
     public int getTotalNTweets() { return  totalNTweets; }
